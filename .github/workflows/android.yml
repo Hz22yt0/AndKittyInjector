@@ -12,9 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        abi: [ "arm64-v8a", "armeabi-v7a", "x86", "x86_64" ]
     env:
       ver_name: "v1.0.0"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,19 +30,22 @@ jobs:
           find /usr/local/lib/android/ -name cmake
           ls
           sh ndk-build.sh
-    - name: Upload Release APK To Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: "AndKittyInjector-${{ matrix.abi }}"
-        path: ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-${{ matrix.abi }}.gz
 
-    - uses: softprops/action-gh-release@v0.1.15
-      with:
-        name: ${{ env.ver_name }}
-        tag_name: ${{ env.ver_name }}
-        body_path: ${{ github.workspace }}/CHANGELOG.md
-        draft: false
-        prerelease: false
-        files: ${{ github.workspace }}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector
-
-          
+  release:
+    needs: build  # 依赖构建任务完成:ml-citation{ref="7,8" data="citationList"}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts  # 下载到统一目录:ml-citation{ref="3" data="citationList"}
+      - name: Create Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: |
+            ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-arm64-v8a-release.gz
+            ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-armeabi-v7a-release.gz
+            ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86-release.gz
+            ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86_64-release.gz
+          tag_name: v${{ github.run_number }}  # 自动生成版本标签:ml-citation{ref="7,10" data="citationList"}
+          body: ${{ github.workspace }}/CHANGELOG.md
