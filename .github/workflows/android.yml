@@ -1,9 +1,12 @@
 name: Android CI
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - "master"
+    paths:
+      - "CHANGELOG.md"
+  workflow_dispatch:
 
 
 jobs:
