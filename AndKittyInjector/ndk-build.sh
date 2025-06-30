@@ -5,7 +5,7 @@ NDK="/usr/local/lib/android/sdk/ndk/26.3.11579264"
 
 # 工具路径
 CMAKE="/usr/local/lib/android/sdk/ndk/28.1.13356709/prebuilt/linux-x86_64/bin/make"
-MAKE="/usr/local/lib/android/sdk/ndk/28.1.13356709/build/cmake"
+MAKE="/usr/local/lib/android/sdk/cmake/3.31.5/bin/cmake"
 BUILD_PATH="cmake_build"
 
 # 目标ABI
