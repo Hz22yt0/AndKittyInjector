@@ -26,9 +26,9 @@ jobs:
     - name: Download Command Line Tools
       run: |
           cd ${{ github.workspace }}/AndKittyInjector
-          find /usr/local/lib/android/ -name make
-          find /usr/local/lib/android/ -name cmake
-          ls
+          #find /usr/local/lib/android/ -name make
+          #find /usr/local/lib/android/ -name cmake
+          #ls
           sh ndk-build.sh
 
   release:
@@ -38,7 +38,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts  # 下载到统一目录:ml-citation{ref="3" data="citationList"}
+          path: ${{ github.workspace }}/AndKittyInjector/cmake_build/*  # 下载到统一目录:ml-citation{ref="3" data="citationList"}
       - name: Create Release
         uses: softprops/action-gh-release@v0.1.15
         with:
