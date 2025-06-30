@@ -15,19 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-
-    - name: Download NDK
+    - name: Download Command Line Tools
       run: |
-        # 设置 NDK 版本
-        NDK_VERSION="r27c"
-        NDK_URL="https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux.zip"
-        
-        # 下载并解压
-        wget $NDK_URL -O ndk.zip
-        unzip -q ndk.zip -d ${{ github.workspace }}/ndk
-        rm ndk.zip
-        
-        echo "NDK_PATH=${{ github.workspace }}/ndk/android-ndk-${NDK_VERSION}" >> $GITHUB_ENV
-      shell: bash
-
-
+          TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
+          wget $TOOLS_URL -O cmdline-tools.zip
+          unzip -q cmdline-tools.zip -d cmdline-tools
+          rm cmdline-tools.zip
+          echo "ANDROID_HOME=${{ github.workspace }}/cmdline-tools" >> $GITHUB_ENV
