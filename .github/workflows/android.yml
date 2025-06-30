@@ -22,8 +22,5 @@ jobs:
           wget $TOOLS_URL -O cmdline-tools.zip
           unzip cmdline-tools.zip -d $ANDROID_HOME
           rm cmdline-tools.zip
-          $ANDROID_HOME/cmdline-tools/bin/sdkmanage
-          
-          yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
-          find ./ -name sdkmanager
-          $ANDROID_HOME/cmdline-tools/bin/sdkmanager "cmake;3.30.3"
+          yes | /usr/local/lib/android/sdk/cmdline-tools/bin/sdkmanager --licenses
+          /usr/local/lib/android/sdk/cmdline-tools/bin/sdkmanager "cmake;3.30.3"
