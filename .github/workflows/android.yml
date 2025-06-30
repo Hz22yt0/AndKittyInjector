@@ -20,7 +20,6 @@ jobs:
           wget -q $TOOLS_URL -O cmdline-tools.zip
           unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
           rm cmdline-tools.zip
-          cd $ANDROID_HOME/cmdline-tools
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
           yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
