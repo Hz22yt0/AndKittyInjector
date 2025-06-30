@@ -58,5 +58,7 @@ jobs:
         files: |
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-arm64-v8a.gz
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-armeabi-v7a.gz
+          ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86_64.gz
+          ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86.gz
         tag_name: v${{ github.run_number }}  # 自动生成版本标签:ml-citation{ref="7,10" data="citationList"}
         body: ${{ github.workspace }}/CHANGELOG.md
