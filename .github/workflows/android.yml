@@ -42,17 +42,13 @@ jobs:
         echo ${{github.workspace}}
         find ${{github.workspace}} -name *AndKittyInjector*
 
-    - name: Download Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: "arm64-v8a"
-        path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/AndKittyInjector-arm64-v8a.gz  # 下载到统一目录
+
 
     - name: Download Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: "armeabi-v7a"
-        path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/AndKittyInjector-armeabi-v7a.gz  # 下载到统一目录
+        name: "gz"
+        path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/*.gz  # 下载到统一目录
 
 
 
