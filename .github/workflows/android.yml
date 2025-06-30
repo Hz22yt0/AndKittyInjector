@@ -37,12 +37,6 @@ jobs:
         tar -czvf AndKittyInjector-armeabi-v7a.gz  armeabi-v7a/AndKittyInjector
         tar -czvf AndKittyInjector-x86_64.gz  x86_64/AndKittyInjector
         tar -czvf AndKittyInjector-x86.gz  x86/AndKittyInjector
-    - name: find
-      run: |
-        echo ${{github.workspace}}
-        find ${{github.workspace}} -name *AndKittyInjector*
-
-
 
     - name: Download Artifacts
       uses: actions/upload-artifact@v4
@@ -60,5 +54,5 @@ jobs:
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-armeabi-v7a.gz
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86_64.gz
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86.gz
-        tag_name: v${{ github.run_number }}  # 自动生成版本标签:ml-citation{ref="7,10" data="citationList"}
+        tag_name: v1.0.${{ github.run_number }}
         body: ${{ github.workspace }}/CHANGELOG.md
