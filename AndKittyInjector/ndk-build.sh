@@ -28,6 +28,4 @@ for abi in $ABIs; do
     -DANDROID_NATIVE_API_LEVEL=21
 
     $MAKE -C$BUILD_PATH/$abi -j16
-    cp $BUILD_PATH/$abi/AndKittyInjector $BUILD_PATH/AndKittyInjector-$abi
-    tar -czvf $BUILD_PATH/AndKittyInjector-$abi.gz $BUILD_PATH/$abi/AndKittyInjector
 done

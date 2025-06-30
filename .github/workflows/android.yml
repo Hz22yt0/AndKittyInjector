@@ -30,6 +30,9 @@ jobs:
           #find /usr/local/lib/android/ -name cmake
           #ls
           sh ndk-build.sh
+    - name: tar
+      run: |
+        tar -czvf ${{github.workspace}}/AndKittyInjector/cmake_build/AndKittyInjector-x86.gz  ${{github.workspace}}/AndKittyInjector/cmake_build/x86/AndKittyInjector
     - name: find
       run: |
         print ${{github.workspace}}
