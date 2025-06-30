@@ -16,7 +16,5 @@ jobs:
 
     - name: Download Command Line Tools
       run: |
+          AndKittyInjector/ndk-build.sh
           
-
-          cd AndKittyInjector
-          cd AndKittyInjector
