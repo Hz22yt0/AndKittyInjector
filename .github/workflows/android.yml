@@ -30,15 +30,17 @@ jobs:
           #find /usr/local/lib/android/ -name cmake
           #ls
           sh ndk-build.sh
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: "arm64-v8a"
+        path: ${{github.workspace}}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector  # 下载到统一目录
 
   release:
     needs: build  # 依赖构建任务完成:ml-citation{ref="7,8" data="citationList"}
     runs-on: ubuntu-latest
     steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ github.workspace }}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector  # 下载到统一目录:ml-citation{ref="3" data="citationList"}
+
       - name: Create Release
         uses: softprops/action-gh-release@v0.1.15
         with:
