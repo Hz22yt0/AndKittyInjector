@@ -19,10 +19,11 @@ jobs:
       run: |
           
           TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
-          wget $TOOLS_URL -O cmdline-tools.zip
-          unzip cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
+          wget -q $TOOLS_URL -O cmdline-tools.zip
+          unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
           rm cmdline-tools.zip
           cd $ANDROID_HOME/cmdline-tools
           mv cmdline-tools latest
           yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          sdkmanage "ndk;25.2.9519653"
           /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "cmake;3.30.3"
