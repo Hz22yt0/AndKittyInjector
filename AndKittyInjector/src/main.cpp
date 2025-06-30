@@ -22,10 +22,10 @@
 #include "Injector/KittyInjector.hpp"
 KittyInjector kitInjector;
 
-injected_info_t inject_lib                (int pid, const std::string &lib, bool use_memfd, bool hide_maps, bool hide_solist);
+injected_info_t inject_lib                (int pid, const std::string &lib, bool use_memfd, bool hide_maps, bool hide_solist, bool sig_stop);
 int             sync_watch_callback       (const std::string &path, uint32_t mask, std::function<bool(int wd, struct inotify_event* event)> cb);
 int             am_process_start_callback (std::function<bool(const android_event_am_proc_start*)> cb);
-void            watch_proc_inject         (const std::string& pkg, const std::string& lib, bool use_dl_memfd, bool hide_maps, bool hide_solist, unsigned int inj_delay, injected_info_t* ret);
+void            watch_proc_inject         (const std::string& pkg, const std::string& lib, bool use_dl_memfd, bool hide_maps, bool hide_solist, unsigned int inj_delay, bool sig_stop, injected_info_t* ret);
 
 bool bHelp = false;
 
@@ -69,6 +69,9 @@ int main(int argc, char* args[])
     unsigned int inj_delay = 0; // optional
     cmdline.addScanf("-delay", "", "Set a delay in microseconds before injecting.", false, "%d", &inj_delay);
 
+    bool sig_stop = true; // optional
+    cmdline.addFlag("-sig_stop", "", "start send sin stop.", false, &sig_stop);
+
     cmdline.parseArgs();
 
     if (bHelp)
@@ -100,7 +103,7 @@ int main(int argc, char* args[])
         if (inj_delay > 0)
             SLEEP_MICROS(inj_delay);
 
-        injectedLibInfo = inject_lib(appPID, libPath, use_dl_memfd, hide_maps, hide_solist);
+        injectedLibInfo = inject_lib(appPID, libPath, use_dl_memfd, hide_maps, hide_solist, sig_stop);
     }
     else if (use_watch_app)
     {
@@ -119,7 +122,7 @@ int main(int argc, char* args[])
 
         KITTY_LOGI("Monitoring %s...", appPkg);
 
-        watch_proc_inject(appPkg, libPath, use_dl_memfd, hide_maps, hide_solist, inj_delay, &injectedLibInfo);
+        watch_proc_inject(appPkg, libPath, use_dl_memfd, hide_maps, hide_solist, inj_delay, sig_stop, &injectedLibInfo);
     }
     // find pid and inject
     else
@@ -133,7 +136,7 @@ int main(int argc, char* args[])
             exit(1);
         }
 
-        injectedLibInfo = inject_lib(appPID, libPath, use_dl_memfd, hide_maps, hide_solist);
+        injectedLibInfo = inject_lib(appPID, libPath, use_dl_memfd, hide_maps, hide_solist, sig_stop);
     }
 
     if (!injectedLibInfo.is_valid())
@@ -149,7 +152,7 @@ int main(int argc, char* args[])
     return 0;
 }
 
-injected_info_t inject_lib(int pid, const std::string& lib, bool use_memfd, bool hide_maps, bool hide_solist)
+injected_info_t inject_lib(int pid, const std::string& lib, bool use_memfd, bool hide_maps, bool hide_solist, bool sig_stop)
 {
     if (pid <= 0)
     {
@@ -159,12 +162,17 @@ injected_info_t inject_lib(int pid, const std::string& lib, bool use_memfd, bool
 
     // ptrace attach will stop one thread in target process
     // use kill to stop the whole process instead
+    bool stopped = false;
+    if(sig_stop){
+        stopped = kill(pid, SIGSTOP) != -1;
+        if (stopped)
+            KITTY_LOGI("inject_lib: Stopped target process threads.");
+        else
+            KITTY_LOGW("inject_lib: Failed to stop target process threads.");
+    }
+    //bool stopped = kill(pid, SIGSTOP) != -1;
 
-    bool stopped = kill(pid, SIGSTOP) != -1;
-    if (stopped)
-        KITTY_LOGI("inject_lib: Stopped target process threads.");
-    else
-        KITTY_LOGW("inject_lib: Failed to stop target process threads.");
+
 
     injected_info_t ret {};
     if (kitInjector.init(pid, EK_MEM_OP_IO))
@@ -295,7 +303,7 @@ int am_process_start_callback(std::function<bool(const android_event_am_proc_sta
 }
 
 void watch_proc_inject(const std::string& pkg, const std::string& lib,
-    bool use_dl_memfd, bool hide_maps, bool hide_solist, unsigned int inj_delay, injected_info_t* ret)
+    bool use_dl_memfd, bool hide_maps, bool hide_solist, unsigned int inj_delay, bool sig_stop, injected_info_t* ret)
 {    
     int pid = 0;
     int proc_monitor = am_process_start_callback([&](const android_event_am_proc_start* event) -> bool {
@@ -345,5 +353,5 @@ void watch_proc_inject(const std::string& pkg, const std::string& lib,
     if (inj_delay > 0)
         SLEEP_MICROS(inj_delay);
 
-    *ret = inject_lib(pid, lib, use_dl_memfd, hide_maps, hide_solist);
+    *ret = inject_lib(pid, lib, use_dl_memfd, hide_maps, hide_solist, sig_stop);
 }

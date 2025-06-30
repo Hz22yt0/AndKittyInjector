@@ -126,6 +126,7 @@ uintptr_t KittyTraceMgr::callFunctionFrom(uintptr_t callerAddress, uintptr_t fun
     if (!functionAddress)
         return 0;
 
+
     if (!isAttached())
     {
         KITTY_LOGE("callFunction failed, Not attached to %d.", remotePID());

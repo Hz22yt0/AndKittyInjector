@@ -3,6 +3,7 @@
 :: Path to ndk
 SET "NDK=%NDK_HOME%"
 
+
 :: Path to cmake
 SET "CMAKE=cmake"
 
@@ -12,7 +13,7 @@ SET "MAKE=make"
 SET BUILD_PATH=cmake_build
 
 :: Targets
-SET "ABIs=arm64-v8a armeabi-v7a x86 x86_64"
+SET "ABIs=arm64-v8a"
 
 for %%x in (%ABIs%) do (
     ECHO ==========================
@@ -32,4 +33,6 @@ for %%x in (%ABIs%) do (
     MAKE -C%BUILD_PATH%/%%x -j16
 )
 
+D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe push D:\AndKittyInjector\AndKittyInjector\cmake_build\arm64-v8a\AndKittyInjector /data/local/tmp
+D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe shell chmod +x /data/local/tmp/AndKittyInjector
 PAUSE

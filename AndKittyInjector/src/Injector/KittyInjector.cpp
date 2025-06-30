@@ -249,7 +249,6 @@ injected_info_t KittyInjector::nativeInject(KittyIOFile& lib, int flags, bool us
             KITTY_LOGE("nativeInject: Failed to map lib path, errno = %s.", _remote_syscall.getRemoteError().c_str());
             return false;
         }
-
         info.dl_handle = _kMgr->trace.callFunction(_remote_dlopen, 2, remoteLibPath, flags);
 
         info.elf = _kMgr->getMemElf(lib.Path());
