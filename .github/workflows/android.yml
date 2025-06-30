@@ -16,5 +16,5 @@ jobs:
       run: |
           
 
-          cd $ANDROID_HOME/AndKittyInjector/
-          cd $ANDROID_HOME/AndKittyInjector1/
+          cd AndKittyInjector
+          cd AndKittyInjector
