@@ -22,3 +22,4 @@ jobs:
           unzip -q cmdline-tools.zip -d cmdline-tools
           rm cmdline-tools.zip
           echo "ANDROID_HOME=${{ github.workspace }}/cmdline-tools" >> $GITHUB_ENV
+          ls $ANDROID_HOME/cmdline-tools
