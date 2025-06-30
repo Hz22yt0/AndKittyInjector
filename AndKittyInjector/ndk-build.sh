@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Path to NDK (需提前设置NDK_HOME环境变量)
-NDK="$NDK_HOME"
+NDK="/usr/local/lib/android/sdk/ndk/25.2.9519653"
 
 # 工具路径
 CMAKE="$ANDROID_HOME/cmake/3.22.1/cmake"
-MAKE="$ANDROID_HOME/ndk/25.2.9519653/make"
+MAKE="$NDK/prebuilt/linux-x86_64/bin/make"
 BUILD_PATH="cmake_build"
 
 # 目标ABI
