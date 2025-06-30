@@ -33,11 +33,14 @@ jobs:
     - name: tar
       run: |
         cd ${{github.workspace}}/AndKittyInjector/cmake_build
-        tar -czvf AndKittyInjector-arm64-v8a.gz  arm64-v8a/AndKittyInjector
-        tar -czvf AndKittyInjector-armeabi-v7a.gz  armeabi-v7a/AndKittyInjector
-        tar -czvf AndKittyInjector-x86_64.gz  x86_64/AndKittyInjector
-        tar -czvf AndKittyInjector-x86.gz  x86/AndKittyInjector
-
+        mv arm64-v8a/AndKittyInjector AndKittyInjector-arm64-v8a
+        mv armeabi-v7a/AndKittyInjector AndKittyInjector-armeabi-v7a
+        mv x86_64/AndKittyInjector AndKittyInjector-x86_64
+        mv x86/AndKittyInjector AndKittyInjector-86
+        gzip AndKittyInjector-arm64-v8a
+        gzip AndKittyInjector-armeabi-v7a
+        gzip AndKittyInjector-x86_64
+        gzip AndKittyInjector-86
     - name: Download Artifacts
       uses: actions/upload-artifact@v4
       with:
