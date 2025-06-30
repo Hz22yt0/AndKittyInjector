@@ -35,7 +35,7 @@ jobs:
         tar -czvf ${{github.workspace}}/AndKittyInjector/cmake_build/AndKittyInjector-x86.gz  ${{github.workspace}}/AndKittyInjector/cmake_build/x86/AndKittyInjector
     - name: find
       run: |
-        print ${{github.workspace}}
+        echo ${{github.workspace}}
         find ${{github.workspace}} -name *AndKittyInjector*
     - name: Download Artifacts
       uses: actions/upload-artifact@v4
