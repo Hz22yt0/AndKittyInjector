@@ -55,4 +55,4 @@ jobs:
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86_64.gz
           ${{ github.workspace }}/AndKittyInjector/cmake_build/AndKittyInjector-x86.gz
         tag_name: v1.0.${{ github.run_number }}
-        body: ${{ github.workspace }}/CHANGELOG.md
+        body_path: ${{ github.workspace }}/CHANGELOG.md

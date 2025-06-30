@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to NDK (需提前设置NDK_HOME环境变量)
-NDK_HOME="/usr/local/lib/android/sdk/ndk/28.1.13356709"
+NDK_HOME="/usr/local/lib/android/sdk/ndk/27.0.12077973"
 NDK="$NDK_HOME"
 
 # 工具路径
