@@ -35,7 +35,7 @@ jobs:
         print ${{github.workspace}}
         find ${{github.workspace}} -name *AndKittyInjector*
     - name: Download Artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
         name: "x86"
         path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/x86/AndKittyInjector  # 下载到统一目录
