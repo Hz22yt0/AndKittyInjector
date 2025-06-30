@@ -36,8 +36,8 @@ jobs:
     - name: Download Artifacts
       uses: actions/download-artifact@v4
       with:
-        name: "arm64-v8a"
-        path: ${{github.workspace}}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector  # 下载到统一目录
+        name: "x86"
+        path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/x86/AndKittyInjector  # 下载到统一目录
 
         
 
