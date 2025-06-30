@@ -21,7 +21,7 @@ jobs:
           wget $TOOLS_URL -O cmdline-tools.zip
           unzip -q cmdline-tools.zip -d cmdline-tools
           rm cmdline-tools.zip
-          echo "ANDROID_HOME=${{ github.workspace }}/cmdline-tools" >> $GITHUB_ENV
+          echo "ANDROID_HOME=${{ github.workspace }}/cmdline-tools/cmdline-tools" >> $GITHUB_ENV
           yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
           find ./ -name sdkmanager
           $ANDROID_HOME/cmdline-tools/bin/sdkmanager "cmake;3.30.3"
