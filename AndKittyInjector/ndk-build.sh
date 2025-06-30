@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to NDK (需提前设置NDK_HOME环境变量)
-NDK_HOME="/usr/local/lib/android/sdk/ndk/27.0.12077973"
+NDK_HOME="/usr/local/lib/android/sdk/ndk/28.1.13356709"
 NDK="$NDK_HOME"
 
 # 工具路径
@@ -26,6 +26,5 @@ for abi in $ABIs; do
     -DANDROID_NDK=$NDK \
     -DANDROID_ABI=$abi \
     -DANDROID_NATIVE_API_LEVEL=21
-
     $MAKE -C$BUILD_PATH/$abi -j16
 done
