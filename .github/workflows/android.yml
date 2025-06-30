@@ -17,6 +17,10 @@ jobs:
       ver_name: "v1.0.0"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    permissions: # 声明所需权限:ml-citation{ref="1" data="citationList"}
+      contents: write    # 仓库内容写入权限（包含repo）
+      packages: write    # 包管理写入权限
+
     steps:
     - uses: actions/checkout@v4
 
