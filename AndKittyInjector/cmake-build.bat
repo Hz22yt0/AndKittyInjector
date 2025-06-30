@@ -31,6 +31,7 @@ for %%x in (%ABIs%) do (
     -DANDROID_NATIVE_API_LEVEL=21
 
     MAKE -C%BUILD_PATH%/%%x -j16
+    tar -czvf %BUILD_PATH%/AndKittyInjector-%%x.gz %BUILD_PATH%/%%x/AndKittyInjector
 )
 
 D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe push D:\AndKittyInjector\AndKittyInjector\cmake_build\arm64-v8a\AndKittyInjector /data/local/tmp

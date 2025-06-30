@@ -10,7 +10,7 @@ MAKE="$NDK_HOME/prebuilt/linux-x86_64/bin/make"
 BUILD_PATH="cmake_build"
 
 # 目标ABI
-ABIs="arm64-v8a"
+ABIs="arm64-v8a armeabi-v7a x86 x86_64"
 
 for abi in $ABIs; do
     echo "=========================="
@@ -28,4 +28,5 @@ for abi in $ABIs; do
     -DANDROID_NATIVE_API_LEVEL=21
 
     $MAKE -C$BUILD_PATH/$abi -j16
+    tar -czvf $BUILD_PATH/AndKittyInjector-$abi.gz $BUILD_PATH/$abi/AndKittyInjector
 done
