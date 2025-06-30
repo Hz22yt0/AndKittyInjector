@@ -34,6 +34,6 @@ for %%x in (%ABIs%) do (
     tar -czvf %BUILD_PATH%/AndKittyInjector-%%x.gz %BUILD_PATH%/%%x/AndKittyInjector
 )
 
-D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe push D:\AndKittyInjector\AndKittyInjector\cmake_build\arm64-v8a\AndKittyInjector /data/local/tmp
-D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe shell chmod +x /data/local/tmp/AndKittyInjector
+:: D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe push D:\AndKittyInjector\AndKittyInjector\cmake_build\arm64-v8a\AndKittyInjector /data/local/tmp
+:: D:\apktool\cache\venv\Lib\site-packages\adbutils\binaries\adb.exe shell chmod +x /data/local/tmp/AndKittyInjector
 PAUSE
