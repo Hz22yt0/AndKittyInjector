@@ -30,14 +30,15 @@ jobs:
           #find /usr/local/lib/android/ -name cmake
           #ls
           sh ndk-build.sh
+    - name: find
+      run: |
+        find ${{github.workspace}} -name *AndKittyInjector*
     - name: Download Artifacts
       uses: actions/download-artifact@v4
       with:
         name: "arm64-v8a"
         path: ${{github.workspace}}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector  # 下载到统一目录
-    - name: find
-      run: |
-        find ${{github.workspace}} -name *AndKittyInjector*
+
         
 
   release:
