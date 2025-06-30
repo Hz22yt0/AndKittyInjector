@@ -25,7 +25,7 @@ jobs:
           /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
           /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1"
           cd /home/runner/work/AndKittyInjector/AndKittyInjector
-          ls /usr/local/lib/android/
-          /usr/local/lib/android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/make
+          ls /usr/local/lib/android/sdk
+          /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/make
 
           
