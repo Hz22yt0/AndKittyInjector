@@ -9,9 +9,9 @@ MAKE="make"
 BUILD_PATH="cmake_build"
 
 # 目标ABI
-ABIs=("arm64-v8a")
+ABIs="arm64-v8a"
 
-for abi in "${ABIs[@]}"; do
+for abi in $ABIs; do
     echo "=========================="
     echo "= Building $abi"
     echo "=========================="
