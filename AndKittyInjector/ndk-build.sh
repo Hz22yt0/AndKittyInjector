@@ -4,8 +4,8 @@
 NDK="$NDK_HOME"
 
 # 工具路径
-CMAKE="cmake"
-MAKE="make"
+CMAKE="$ANDROID_HOME/cmake/3.22.1/cmake"
+MAKE="$ANDROID_HOME/ndk/25.2.9519653/make"
 BUILD_PATH="cmake_build"
 
 # 目标ABI

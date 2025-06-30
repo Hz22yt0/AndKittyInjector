@@ -23,6 +23,7 @@ jobs:
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
           yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
-          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "cmake;3.30.3"
-          sh AndKittyInjector/ndk-build.sh
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1"
+          cd
+          make
           
