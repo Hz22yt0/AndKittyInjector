@@ -1,0 +1,33 @@
+name: Android CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+
+    - name: Download NDK
+      run: |
+        # 设置 NDK 版本
+        NDK_VERSION="r27c"
+        NDK_URL="https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux.zip"
+        
+        # 下载并解压
+        wget $NDK_URL -O ndk.zip
+        unzip -q ndk.zip -d ${{ github.workspace }}/ndk
+        rm ndk.zip
+        
+        echo "NDK_PATH=${{ github.workspace }}/ndk/android-ndk-${NDK_VERSION}" >> $GITHUB_ENV
+      shell: bash
+
+
