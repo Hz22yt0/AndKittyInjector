@@ -35,6 +35,10 @@ jobs:
       with:
         name: "arm64-v8a"
         path: ${{github.workspace}}/AndKittyInjector/cmake_build/arm64-v8a/AndKittyInjector  # 下载到统一目录
+    - name: find
+      run: |
+        find ${{github.workspace}} -name *AndKittyInjector*
+        
 
   release:
     needs: build  # 依赖构建任务完成:ml-citation{ref="7,8" data="citationList"}
