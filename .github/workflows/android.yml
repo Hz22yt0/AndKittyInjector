@@ -32,12 +32,16 @@ jobs:
           sh ndk-build.sh
     - name: tar
       run: |
-        tar -czvf AndKittyInjector-x86.gz  ${{github.workspace}}/AndKittyInjector/cmake_build/x86/AndKittyInjector
+        cd ${{github.workspace}}/AndKittyInjector/cmake_build
+        tar -czvf AndKittyInjector-arm64-v8a.gz  arm64-v8a/AndKittyInjector
+        tar -czvf AndKittyInjector-armeabi-v7a.gz  armeabi-v7a/AndKittyInjector
+        tar -czvf AndKittyInjector-x86_64.gz  x86_64/AndKittyInjector
+        tar -czvf AndKittyInjector-x86.gz  x86/AndKittyInjector
     - name: find
       run: |
         echo ${{github.workspace}}
         find ${{github.workspace}} -name *AndKittyInjector*
-        find ${{github.workspace}} -name AndKittyInjector-x86.gz
+
     - name: Download Artifacts
       uses: actions/upload-artifact@v4
       with:
