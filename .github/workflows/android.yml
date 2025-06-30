@@ -17,6 +17,8 @@ jobs:
     - name: Download Command Line Tools
       run: |
           cd /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector
+          find /usr/local/lib/android/ -name make
+          find /usr/local/lib/android/ -name cmake
           ls
           sh ndk-build.sh
           
