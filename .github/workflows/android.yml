@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Gunakan Ubuntu 22.04 bukan ubuntu-latest
+    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 for better NDK compatibility
     env:
       ver_name: "v1.0.0"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,15 +22,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Android NDK
-      uses: android-actions/setup-android-ndk@v1
+    - name: Set up JDK
+      uses: actions/setup-java@v3
       with:
-        ndk-version: "25.1.8937393"  # Gunakan NDK version yang tersedia
+        distribution: 'temurin'
+        java-version: '11'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        ndk-version: "25.1.8937393"  # Use a available NDK version
 
     - name: Build with NDK
       run: |
         cd ${{ github.workspace }}/AndKittyInjector
-        # Set environment variables untuk NDK
+        # Set environment variables for NDK
         export ANDROID_NDK_HOME=$ANDROID_NDK_ROOT
         sh ndk-build.sh
         
