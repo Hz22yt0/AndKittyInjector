@@ -8,29 +8,33 @@ on:
       - "CHANGELOG.md"
   workflow_dispatch:
 
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Gunakan Ubuntu 22.04 bukan ubuntu-latest
     env:
       ver_name: "v1.0.0"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    permissions: # 声明所需权限:ml-citation{ref="1" data="citationList"}
-      contents: write    # 仓库内容写入权限（包含repo）
-      packages: write    # 包管理写入权限
+    permissions:
+      contents: write
+      packages: write
 
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Setup Android NDK
+      uses: android-actions/setup-android-ndk@v1
+      with:
+        ndk-version: "25.1.8937393"  # Gunakan NDK version yang tersedia
 
-    - name: Download Command Line Tools
+    - name: Build with NDK
       run: |
-          cd ${{ github.workspace }}/AndKittyInjector
-          #find /usr/local/lib/android/ -name make
-          #find /usr/local/lib/android/ -name cmake
-          #ls
-          sh ndk-build.sh
-    - name: tar
+        cd ${{ github.workspace }}/AndKittyInjector
+        # Set environment variables untuk NDK
+        export ANDROID_NDK_HOME=$ANDROID_NDK_ROOT
+        sh ndk-build.sh
+        
+    - name: Package binaries
       run: |
         cd ${{github.workspace}}/AndKittyInjector/cmake_build
         mv arm64-v8a/AndKittyInjector AndKittyInjector-arm64-v8a
@@ -41,13 +45,12 @@ jobs:
         gzip AndKittyInjector-armeabi-v7a
         gzip AndKittyInjector-x86_64
         gzip AndKittyInjector-x86
-    - name: Download Artifacts
+        
+    - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: "gz"
-        path: /home/runner/work/AndKittyInjector/AndKittyInjector/AndKittyInjector/cmake_build/*.gz  # 下载到统一目录
-
-
+        path: ${{ github.workspace }}/AndKittyInjector/cmake_build/*.gz
 
     - name: Create Release
       uses: softprops/action-gh-release@v0.1.15
